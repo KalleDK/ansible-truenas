@@ -336,7 +336,7 @@ def main():
             # XXX - remove: delete home directory. builtin.user allows
             # doing this.
 
-            smb=dict(type='bool', default=True),
+            smb=dict(type='bool', default=None),
 
             sudo_commands=dict(type='list',
                                elements='str'),
@@ -536,6 +536,8 @@ def main():
 
             if smb is not None:
                 arg['smb'] = smb
+            else:
+                arg['smb'] = True
 
             if old_sudo_call:
                 # 'old_sudo_call' isn't set to True until we know that
