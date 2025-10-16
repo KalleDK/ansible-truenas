@@ -232,11 +232,21 @@ user_id:
 '''
 
 import sys
+import passlib.hash
 from ansible.module_utils.basic import AnsibleModule
 from ..module_utils.middleware import MiddleWare as MW
 from ..module_utils import setup
 # For parsing version numbers
 from packaging import version
+
+def password_matches(plain, crypt):
+    """
+    Return True if the plaintext password 'plain' matches the
+    crypted password 'crypt'.
+    """
+    if plain == crypt:
+        return True
+    return passlib.hash.sha512_crypt.verify(plain, crypt)
 
 def main():
     # Figure out which version of TrueNAS we're running, and thus how
@@ -735,7 +745,7 @@ def main():
                 arg['uid'] = uid
 
             # Compare the given password to the existing hash.
-            if password is not None and user_info['unixhash'] != password:
+            if password is not None and not password_matches(password, user_info['unixhash']):
                 arg['password'] = password
 
             if password_disabled is not None and \
