@@ -510,14 +510,18 @@ def main():
             arg = {
                 "username": username,
 
-                # Either password_disabled == True, or password must be
-                # supplied.
-                "password": password,
             }
 
             # Easy cases first
             if password_disabled is not None:
                 arg['password_disabled'] = password_disabled
+
+                # SCALE at least doesn't like you passing in an empty
+                # password, even if password_disabled has been
+                # specified. So let's make sure that a password is
+                # wanted, first.
+                if not password_disabled:
+                    arg['password']: password
 
             if comment is None:
                 arg['full_name'] = ""
