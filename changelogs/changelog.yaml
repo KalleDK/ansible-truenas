@@ -106,6 +106,19 @@ releases:
     fragments:
     - pr39-nfs.yaml
     release_date: '2025-09-05'
+  1.14.3:
+    changes:
+      bugfixes:
+      - 'CORE: ``filesystem`` longer complains about ``create_ancestors`` option when
+        it wasn''t even specified.'
+      - Couldn't create a user with a disabled password in SCALE.
+      - Fixed bug that prevented creating groups in SCALE.
+      major_changes:
+      - A new role, ``macbackups``, allows setting up a volume for MacOS Time Machine
+        backups.
+      - In ``filesystem``, ``comment`` is now ``comments``.
+      release_summary: Some bug fixes. A new role to set up Time Machine backups.
+    release_date: '2025-11-08'
   1.4.5:
     changes:
       breaking_changes:

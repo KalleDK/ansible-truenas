@@ -60,3 +60,7 @@ Including an example of how to use your role (for instance, with variables passe
           allow_hosts:
             - 10.20.1.1
             - 192.168.1.0/24
+
+Version Added
+-------------
+1.14.3
