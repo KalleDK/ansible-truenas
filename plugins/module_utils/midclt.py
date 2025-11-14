@@ -117,7 +117,12 @@ class Midclt:
             # a MethodNotFoundError. But we can't raise that, because
             # we're using the command-line client, and so assuming
             # that we don't have access to the Python libraries.
-            if stdout.startswith("[ENOMETHOD]"):
+            #
+            # At some point, they stopped printing "[ENOMETHOD]" to
+            # stderr, which leaves us looking for specific error
+            # messages. This could get messy if they add i18n/l10n.
+            if stdout.startswith("[ENOMETHOD]") or \
+               stdout == "Method does not exist\n":
                 # No such method.
                 raise AnsibleMethodNotFoundError(func, stdout)
 

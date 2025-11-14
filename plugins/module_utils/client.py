@@ -53,7 +53,9 @@ class MiddlewareClient:
             # original exception, so it can't import it.
             raise AnsibleMethodNotFoundError(func, str(e))
         except MWClient.ClientException as e:
-            if e.errno == 201:
+            # raise Exception(f"errno: {e.errno}, error {e.error}, trace {e.trace}, extra {e.extra}")
+            if e.errno == 201 or \
+               e.error == "Method does not exist":
                 # errno 201, error [ENOMETHOD] Service 'bogus' not found, extra None
                 raise AnsibleMethodNotFoundError(func, e.error)
 
