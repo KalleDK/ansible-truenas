@@ -55,7 +55,8 @@ about.
 
 1. Create a release in github.
 
-1. `make tarball`. Upload the new tarball to Ansible Galaxy.
+1. `make tarball`. Make sure that the tarball doesn't contain any extraneous files.
+Upload the new tarball to Ansible Galaxy.
 
 1. `make documentation; make update-doc-site`. Push the docs out to the
 web site.

@@ -69,7 +69,9 @@ build_ignore:
 - errs*
 - '**.bak'
 - docs-site
-- venv-docs
+- venv*
 - docs
 - ansible_collections
 - changelogs/.plugin-cache.yaml
+- changelogs/fragments*
+- .pytest_cache
