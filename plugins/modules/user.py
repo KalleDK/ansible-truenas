@@ -509,7 +509,6 @@ def main():
             # Collect arguments to pass to user.create()
             arg = {
                 "username": username,
-
             }
 
             # Easy cases first
