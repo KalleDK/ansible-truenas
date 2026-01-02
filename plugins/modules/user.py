@@ -99,8 +99,6 @@ options:
     description:
       - User's password, as a crypted string.
       - Required unless C(password_disabled) is true.
-      - "Note: Currently there is no way to check whether the password
-        needs to be changed, so this is used only when the user is created."
     type: str
   password_disabled:
     description:
@@ -509,7 +507,6 @@ def main():
             # Collect arguments to pass to user.create()
             arg = {
                 "username": username,
-
             }
 
             # Easy cases first
@@ -521,7 +518,10 @@ def main():
                 # specified. So let's make sure that a password is
                 # wanted, first.
                 if not password_disabled:
-                    arg['password']: password
+                    arg['password'] = password
+            else:
+                # password_disabled is not set.
+                arg['password'] = password
 
             if comment is None:
                 arg['full_name'] = ""
@@ -734,13 +734,9 @@ def main():
             if uid is not None and user_info['uid'] != uid:
                 arg['uid'] = uid
 
-            # XXX - There's probably a way to get user.query() to
-            # return the current crypt string of a user,but I don't
-            # know what that is. Until then, we can't check whether
-            # the password needs to be changed.
-
-            # if password is not None and user_info['password'] != password:
-            #     arg['password'] = password
+            # Compare the given password to the existing hash.
+            if password is not None and user_info['unixhash'] != password:
+                arg['password'] = password
 
             if password_disabled is not None and \
                user_info['password_disabled'] != password_disabled:
