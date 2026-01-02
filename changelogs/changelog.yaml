@@ -292,3 +292,10 @@ releases:
     fragments:
     - pool-scrub-json.yaml
     release_date: '2024-05-29'
+  1.14.4:
+    changes:
+      bugfixes:
+      - "Can now create a new user with a password."
+      minor_changes:
+      - "Can now change the password of an existing user."
+    release_date: '2026-01-01'
